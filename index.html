@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agnecy — Performance Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dp:#5840BA; --ml:#715BC2; --gr:#A5DA76;
+  --nb:#1B1B1B; --nw:#FEFEFE;
+  --b:rgba(254,254,254,0.11); --bh:rgba(254,254,254,0.22);
+  --tm:rgba(254,254,254,0.62); --td:rgba(254,254,254,0.32);
+  --ac2:rgba(165,218,118,0.12); --ac3:rgba(165,218,118,0.28);
+  --f:'Outfit',system-ui,sans-serif;
+  --radius:12px; --radius-lg:16px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--dp);color:var(--nw);font-family:var(--f);font-size:15px;line-height:1.6;overflow-x:hidden}
+button{font-family:var(--f);cursor:pointer;border:none}
+a{text-decoration:none;color:inherit}
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.a1{animation:fadeUp .6s ease both}
+.a2{animation:fadeUp .6s ease .1s both}
+.a3{animation:fadeUp .6s ease .2s both}
+.a4{animation:fadeUp .6s ease .3s both}
+.a5{animation:fadeUp .6s ease .4s both}
+.fl0{animation:float 4s ease-in-out infinite 0s}
+.fl1{animation:float 4s ease-in-out infinite .8s}
+.fl2{animation:float 4s ease-in-out infinite 1.6s}
+.page-enter{animation:fadeIn .35s ease both}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+.nav{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;
+  padding:0 48px;height:64px;
+  background:rgba(88,64,186,0.95);
+  backdrop-filter:blur(16px);
+  border-bottom:0.5px solid var(--b);
+}
+.nav-logo{font-size:20px;font-weight:800;color:var(--nw);margin-right:auto;letter-spacing:-.04em;cursor:pointer}
+.nav-logo span{color:var(--gr)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-lnk{font-size:13.5px;color:var(--tm);cursor:pointer;transition:color .2s;white-space:nowrap}
+.nav-lnk:hover,.nav-lnk.active{color:var(--nw)}
+.nav-lnk.active{font-weight:600}
+.nav-btn{
+  margin-left:16px;padding:9px 20px;
+  background:var(--gr);color:var(--nb);
+  font-size:13px;font-weight:700;border-radius:8px;
+  transition:opacity .2s;white-space:nowrap;
+}
+.nav-btn:hover{opacity:.88}
+/* Hamburger */
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.ham span{display:block;width:22px;height:2px;background:var(--nw);border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* Mobile menu */
+.mob-menu{
+  display:none;position:fixed;top:64px;left:0;right:0;bottom:0;
+  background:rgba(88,64,186,0.98);backdrop-filter:blur(20px);
+  z-index:199;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:32px;
+}
+.mob-menu.open{display:flex}
+.mob-lnk{
+  font-size:22px;font-weight:700;color:var(--tm);
+  padding:14px 32px;border-radius:12px;cursor:pointer;
+  transition:color .2s,background .2s;width:100%;text-align:center;
+}
+.mob-lnk:hover,.mob-lnk.active{color:var(--nw);background:rgba(254,254,254,0.08)}
+.mob-btn{
+  margin-top:12px;padding:16px 40px;
+  background:var(--gr);color:var(--nb);
+  font-size:16px;font-weight:700;border-radius:10px;
+  width:100%;text-align:center;cursor:pointer;
+}
+
+/* ═══════════════════════════════════════
+   SHARED SECTION STYLES
+═══════════════════════════════════════ */
+.sec{padding:72px 48px}
+.sec-sm{padding:52px 48px}
+.stag{font-size:11px;font-weight:600;color:var(--gr);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.ssub{font-size:15px;color:var(--tm);margin-top:10px;line-height:1.65;max-width:520px}
+.sh{margin-bottom:42px}
+.divider{height:0.5px;background:var(--b)}
+/* Shared cards */
+.card{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:var(--radius);padding:24px;transition:border-color .25s,transform .2s,background .2s}
+.card:hover{border-color:var(--ac3);background:rgba(254,254,254,0.11);transform:translateY(-2px)}
+/* Buttons */
+.btn-green{padding:13px 26px;background:var(--gr);color:var(--nb);font-size:14px;font-weight:700;border-radius:9px;transition:opacity .2s;display:inline-block}
+.btn-green:hover{opacity:.88}
+.btn-ghost{padding:13px 26px;background:rgba(254,254,254,0.08);color:var(--nw);font-size:14px;font-weight:500;border-radius:9px;border:0.5px solid var(--b);transition:background .2s;display:inline-block}
+.btn-ghost:hover{background:rgba(254,254,254,0.14)}
+.btn-dark{padding:13px 26px;background:var(--nb);color:var(--nw);font-size:14px;font-weight:700;border-radius:9px;transition:opacity .2s;display:inline-block}
+.btn-dark:hover{opacity:.82}
+/* Green accent tag */
+.atag{font-size:10.5px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--ac2);color:var(--gr);border:0.5px solid rgba(165,218,118,0.22);letter-spacing:.04em;text-transform:uppercase}
+/* Section with dark overlay */
+.sec-dark{background:rgba(0,0,0,0.1)}
+
+/* ═══════════════════════════════════════
+   FOOTER (shared)
+═══════════════════════════════════════ */
+.footer{border-top:0.5px solid var(--b);padding:48px 48px 24px;background:rgba(0,0,0,0.15);display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:32px}
+.ft-logo{font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:12px}
+.ft-logo span{color:var(--gr)}
+.ft-tagline{font-size:13px;color:var(--tm);line-height:1.6;max-width:200px}
+.ft-soc{display:flex;gap:8px;margin-top:18px}
+.ft-si{width:32px;height:32px;border-radius:7px;background:rgba(254,254,254,0.07);border:0.5px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--tm);cursor:pointer;transition:color .2s,border-color .2s}
+.ft-si:hover{color:var(--nw);border-color:var(--bh)}
+.ft-col h4{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--td);margin-bottom:14px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-col li{font-size:13px;color:var(--tm);cursor:pointer;transition:color .2s}
+.ft-col li:hover{color:var(--nw)}
+.ft-bottom{border-top:0.5px solid var(--b);margin:0 48px;padding:16px 0;display:flex;justify-content:space-between;align-items:center}
+.ft-bottom p,.ft-bottom span{font-size:12px;color:var(--td)}
+.ft-bottom span{cursor:pointer;transition:color .2s}
+.ft-bottom span:hover{color:var(--tm)}
+
+/* ═══════════════════════════════════════
+   PAGE: HOME
+═══════════════════════════════════════ */
+/* HERO — fixed gap, tight 2-col */
+.hero{
+  padding:60px 48px;
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:32px;
+  align-items:center;
+  position:relative;overflow:hidden;
+}
+.hero-glow{position:absolute;bottom:-30%;right:15%;width:45%;height:65%;background:radial-gradient(ellipse,rgba(165,218,118,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-glow2{position:absolute;top:-20%;left:-10%;width:45%;height:55%;background:radial-gradient(ellipse,rgba(113,91,194,0.6) 0%,transparent 70%);pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--nb);background:var(--gr);padding:5px 14px;border-radius:24px;margin-bottom:22px;letter-spacing:.06em;text-transform:uppercase}
+.ed{width:5px;height:5px;border-radius:50%;background:var(--nb);animation:pulse 2s ease infinite}
+.hero h1{font-size:52px;font-weight:800;line-height:1.05;letter-spacing:-.04em;margin-bottom:18px}
+.hero h1 em{color:var(--gr);font-style:normal}
+.hero-sub{font-size:15px;color:var(--tm);line-height:1.7;max-width:420px;margin-bottom:32px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+/* Metric cards column */
+.hero-vis{display:flex;flex-direction:column;gap:12px}
+.mc{background:rgba(254,254,254,0.08);border:0.5px solid var(--b);border-radius:12px;padding:16px 18px;transition:border-color .2s}
+.mc:hover{border-color:var(--ac3)}
+.mc-lbl{font-size:10px;color:var(--td);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.mc-val{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.mc-meta{font-size:11px;color:var(--gr);margin-top:3px}
+.mc-meta.neg{color:#E07070}
+
+/* Industries marquee */
+.ind-bar{padding:20px 48px;border-top:0.5px solid var(--b);border-bottom:0.5px solid var(--b);overflow:hidden;background:rgba(0,0,0,0.08)}
+.ind-lbl{font-size:10px;font-weight:600;color:var(--td);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.ind-tw{overflow:hidden}
+.ind-tr{display:flex;gap:10px;width:max-content;animation:marquee 22s linear infinite}
+.ind-tr:hover{animation-play-state:paused}
+.itag{font-size:12px;font-weight:500;padding:6px 16px;border:0.5px solid var(--b);border-radius:20px;color:var(--tm);background:rgba(254,254,254,0.06);white-space:nowrap;transition:border-color .2s,color .2s;cursor:default}
+.itag:hover{border-color:var(--ac3);color:var(--nw)}
+
+/* Stats bar */
+.stats-bar{display:grid;grid-template-columns:repeat(3,1fr)}
+.stat{padding:32px 48px;border-right:0.5px solid var(--b);background:rgba(0,0,0,0.1);position:relative;overflow:hidden}
+.stat:last-child{border-right:none}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gr),transparent 75%);opacity:0;transition:opacity .3s}
+.stat:hover::before{opacity:1}
+.stat-n{font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat-n span{color:var(--gr)}
+.stat-l{font-size:13px;color:var(--tm);margin-top:5px}
+
+/* Services grid */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc-card{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:14px;padding:26px 22px;cursor:pointer;transition:border-color .25s,background .2s,transform .2s;position:relative;overflow:hidden}
+.svc-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(165,218,118,0.07),transparent 60%);opacity:0;transition:opacity .3s}
+.svc-card:hover{border-color:var(--ac3);background:rgba(254,254,254,0.11);transform:translateY(-2px)}
+.svc-card:hover::after{opacity:1}
+.svc-icon{width:44px;height:44px;border-radius:11px;background:var(--ac2);border:0.5px solid rgba(165,218,118,0.22);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.svc-name{font-size:16px;font-weight:700;margin-bottom:8px}
+.svc-desc{font-size:13px;color:var(--tm);line-height:1.6}
+.svc-list{margin-top:14px;display:flex;flex-direction:column;gap:5px}
+.svc-li{font-size:12px;color:var(--td);display:flex;align-items:center;gap:7px}
+.svc-li::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--gr);flex-shrink:0;opacity:.7}
+.svc-lnk{font-size:12px;font-weight:600;color:var(--gr);margin-top:16px;display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+
+/* Process */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);border:0.5px solid var(--b);border-radius:14px;overflow:hidden}
+.proc-step{padding:24px 20px;border-right:0.5px solid var(--b);background:rgba(0,0,0,0.08);position:relative}
+.proc-step:last-child{border-right:none}
+.ps-num{font-size:10.5px;font-weight:600;color:var(--gr);letter-spacing:.06em;margin-bottom:10px}
+.ps-name{font-size:14px;font-weight:700;margin-bottom:5px}
+.ps-desc{font-size:12px;color:var(--tm);line-height:1.5}
+.ps-conn{position:absolute;top:24px;right:-7px;width:14px;height:14px;background:var(--dp);border:0.5px solid var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1}
+.ps-conn::after{content:'›';font-size:9px;color:var(--gr)}
+.proc-step:last-child .ps-conn{display:none}
+
+/* Case study block */
+.cs-block{display:grid;grid-template-columns:1.1fr 1fr;background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:14px;overflow:hidden}
+.cs-left{padding:32px 30px;border-right:0.5px solid var(--b)}
+.cs-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.cs-big{font-size:56px;font-weight:800;letter-spacing:-.05em;line-height:1;margin-bottom:6px}
+.cs-big span{color:var(--gr)}
+.cs-sub{font-size:18px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.cs-body{font-size:13px;color:var(--tm);line-height:1.7;margin-bottom:20px}
+.cs-lnk{font-size:13px;font-weight:600;color:var(--gr);cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:gap .2s}
+.cs-lnk:hover{gap:9px}
+.cs-right{padding:32px 26px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.mr-row{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.12);border:0.5px solid var(--b);border-radius:9px;padding:12px 14px}
+.mr-lbl{font-size:12px;color:var(--tm)}
+.mr-vals{display:flex;align-items:center;gap:7px}
+.mr-before{font-size:12.5px;font-weight:500;color:var(--td);text-decoration:line-through}
+.mr-arrow{font-size:10px;color:var(--td)}
+.mr-after{font-size:13px;font-weight:700;color:var(--gr)}
+.mr-only{font-size:13px;font-weight:700}
+
+/* Testimonials */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:14px;padding:24px;transition:border-color .2s}
+.tcard:hover{border-color:rgba(165,218,118,0.3)}
+.tcard-stars{color:var(--gr);font-size:13px;margin-bottom:14px;letter-spacing:1px}
+.tcard-q{font-size:13px;color:var(--tm);line-height:1.7;margin-bottom:18px;font-style:italic}
+.tcard-q::before{content:'\201C';color:var(--gr);font-size:18px;font-style:normal;display:block;margin-bottom:5px}
+.tcard-author{display:flex;align-items:center;gap:10px}
+.tcard-av{width:36px;height:36px;border-radius:50%;background:var(--ac2);border:0.5px solid rgba(165,218,118,0.22);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gr);flex-shrink:0}
+.tcard-name{font-size:13px;font-weight:600}
+.tcard-role{font-size:11px;color:var(--td);margin-top:1px}
+
+/* CTA Banner */
+.cta-section{padding:0 48px 72px}
+.cta-box{background:var(--gr);border-radius:18px;padding:54px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-55%;right:-8%;width:450px;height:450px;border-radius:50%;background:rgba(255,255,255,0.12);pointer-events:none}
+.cta-box::after{content:'';position:absolute;bottom:-40%;left:-5%;width:300px;height:300px;border-radius:50%;background:rgba(88,64,186,0.14);pointer-events:none}
+.cta-box h2{font-size:34px;font-weight:800;color:var(--nb);letter-spacing:-.03em;margin-bottom:10px;position:relative;z-index:1}
+.cta-box p{font-size:15px;color:rgba(27,27,27,0.65);margin-bottom:28px;position:relative;z-index:1}
+.cta-box .btn-dark{position:relative;z-index:1}
+.cta-note{font-size:12px;color:rgba(27,27,27,0.48);margin-top:12px;position:relative;z-index:1}
+
+/* ═══════════════════════════════════════
+   PAGE: SERVICES
+═══════════════════════════════════════ */
+.page-hero{padding:64px 48px 52px;border-bottom:0.5px solid var(--b)}
+.page-hero h1{font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1.08;margin-bottom:14px}
+.page-hero p{font-size:15px;color:var(--tm);max-width:520px;line-height:1.7}
+.svc-detail{padding:56px 48px;border-bottom:0.5px solid var(--b)}
+.svc-detail:nth-child(even){background:rgba(0,0,0,0.06)}
+.svc-detail-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.svc-detail-inner.rev{direction:rtl}
+.svc-detail-inner.rev>*{direction:ltr}
+.svc-detail-icon{width:56px;height:56px;border-radius:14px;background:var(--ac2);border:0.5px solid rgba(165,218,118,0.22);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
+.svc-detail h2{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
+.svc-detail-desc{font-size:14px;color:var(--tm);line-height:1.7;margin-bottom:20px}
+.svc-delivers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+.svc-del-item{background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:9px;padding:10px 14px;font-size:12.5px;color:var(--tm);display:flex;align-items:center;gap:8px}
+.svc-del-item::before{content:'✓';color:var(--gr);font-size:11px;font-weight:700;flex-shrink:0}
+.svc-detail-right{background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:14px;padding:26px}
+.svc-detail-right h3{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--nw)}
+.svc-detail-right .metric{display:flex;flex-direction:column;gap:8px}
+.metric-item{background:rgba(0,0,0,0.1);border:0.5px solid var(--b);border-radius:9px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.metric-item span:first-child{font-size:12px;color:var(--tm)}
+.metric-item span:last-child{font-size:14px;font-weight:700;color:var(--gr)}
+.tools-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tool-chip{font-size:12px;font-weight:500;padding:6px 14px;border:0.5px solid var(--b);border-radius:20px;color:var(--tm);background:rgba(254,254,254,0.06)}
+
+/* How we work */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:0.5px solid var(--b);border-radius:14px;overflow:hidden}
+
+/* ═══════════════════════════════════════
+   PAGE: CASE STUDIES
+═══════════════════════════════════════ */
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.ftab{font-size:12.5px;font-weight:500;padding:7px 18px;border:0.5px solid var(--b);border-radius:20px;color:var(--tm);background:rgba(254,254,254,0.06);cursor:pointer;transition:all .2s}
+.ftab:hover,.ftab.active{background:var(--ac2);border-color:var(--ac3);color:var(--gr)}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cs-card{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:14px;padding:24px;cursor:pointer;transition:border-color .25s,background .2s,transform .2s}
+.cs-card:hover{border-color:var(--ac3);background:rgba(254,254,254,0.11);transform:translateY(-2px)}
+.cs-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.cs-card-metric{font-size:42px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:6px}
+.cs-card-metric span{color:var(--gr)}
+.cs-card-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.cs-card-desc{font-size:12.5px;color:var(--tm);line-height:1.6;margin-bottom:16px}
+.cs-card-lnk{font-size:12px;font-weight:600;color:var(--gr);display:inline-flex;align-items:center;gap:4px}
+
+/* Individual case study */
+.cs-full-header{padding:56px 48px 0}
+.cs-full-metric{font-size:72px;font-weight:800;letter-spacing:-.05em;line-height:1;margin-bottom:8px}
+.cs-full-metric span{color:var(--gr)}
+.cs-full-body{padding:40px 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px}
+.cs-story-section{margin-bottom:28px}
+.cs-story-section h3{font-size:16px;font-weight:700;color:var(--gr);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cs-story-section h3::before{content:'';width:4px;height:16px;background:var(--gr);border-radius:2px;flex-shrink:0}
+.cs-story-section p{font-size:14px;color:var(--tm);line-height:1.7}
+.cs-results-card{background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:14px;padding:24px;position:sticky;top:80px}
+.cs-results-card h3{font-size:14px;font-weight:700;margin-bottom:16px}
+.cs-testi{background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:14px;padding:22px;margin-top:16px}
+.cs-testi p{font-size:13px;color:var(--tm);line-height:1.7;font-style:italic;margin-bottom:12px}
+.cs-testi p::before{content:'\201C';color:var(--gr);font-size:16px;font-style:normal}
+.cs-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--tm);cursor:pointer;margin-bottom:24px;transition:color .2s}
+.cs-back:hover{color:var(--nw)}
+
+/* ═══════════════════════════════════════
+   PAGE: ABOUT
+═══════════════════════════════════════ */
+.about-hero{padding:64px 48px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;border-bottom:0.5px solid var(--b)}
+.about-hero h1{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1.08;margin-bottom:14px}
+.about-hero p{font-size:15px;color:var(--tm);line-height:1.7}
+.about-vis{display:flex;flex-direction:column;gap:12px}
+.about-stat-card{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:12px;padding:20px 22px}
+.about-stat-n{font-size:36px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.about-stat-n span{color:var(--gr)}
+.about-stat-l{font-size:12px;color:var(--tm);margin-top:4px}
+.founder-grid{padding:60px 48px;display:grid;grid-template-columns:1fr 1.6fr;gap:48px;align-items:start;border-bottom:0.5px solid var(--b)}
+.founder-photo{background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:14px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.founder-photo-initials{width:72px;height:72px;border-radius:50%;background:var(--ac2);border:0.5px solid var(--ac3);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--gr)}
+.founder-photo-label{font-size:13px;color:var(--td)}
+.founder-content h2{font-size:30px;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.founder-content .title{font-size:13px;color:var(--gr);font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:6px}
+.founder-content p{font-size:14px;color:var(--tm);line-height:1.75;margin-bottom:14px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.team-card{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:12px;padding:22px;text-align:center;transition:border-color .2s}
+.team-card:hover{border-color:var(--ac3)}
+.team-av{width:52px;height:52px;border-radius:50%;background:var(--ac2);border:0.5px solid var(--ac3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--gr);margin:0 auto 12px}
+.team-name{font-size:14px;font-weight:700;margin-bottom:3px}
+.team-role{font-size:12px;color:var(--gr);font-weight:600;margin-bottom:6px}
+.team-bio{font-size:12px;color:var(--tm);line-height:1.5}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.val-card{background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:12px;padding:24px}
+.val-icon{font-size:24px;margin-bottom:12px}
+.val-name{font-size:15px;font-weight:700;margin-bottom:6px}
+.val-desc{font-size:13px;color:var(--tm);line-height:1.6}
+.val-practice{font-size:12px;color:var(--gr);margin-top:8px;font-style:italic}
+.cert-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:0}
+.cert-chip{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:10px 18px;border:0.5px solid var(--ac3);border-radius:10px;background:var(--ac2);color:var(--gr)}
+
+/* ═══════════════════════════════════════
+   PAGE: BOOK A CALL
+═══════════════════════════════════════ */
+.book-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 64px)}
+.book-left{padding:60px 48px;border-right:0.5px solid var(--b);background:rgba(0,0,0,0.08)}
+.book-left h1{font-size:38px;font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:14px}
+.book-left p{font-size:14px;color:var(--tm);line-height:1.7;margin-bottom:28px}
+.book-perks{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.perk{display:flex;align-items:flex-start;gap:12px;font-size:13.5px;color:var(--tm);line-height:1.5}
+.perk-icon{width:28px;height:28px;border-radius:7px;background:var(--ac2);border:0.5px solid var(--ac3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px}
+.book-steps{margin-bottom:32px}
+.book-step{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--b)}
+.book-step:last-child{border-bottom:none}
+.book-step-n{width:24px;height:24px;border-radius:50%;background:var(--gr);color:var(--nb);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.book-step-text h4{font-size:13px;font-weight:700;margin-bottom:2px}
+.book-step-text p{font-size:12px;color:var(--tm);line-height:1.5}
+.wa-btn{display:flex;align-items:center;gap:10px;padding:13px 20px;background:rgba(37,211,102,0.12);border:0.5px solid rgba(37,211,102,0.3);border-radius:10px;cursor:pointer;font-size:13.5px;font-weight:600;color:#25D366;transition:background .2s;width:100%;justify-content:center}
+.wa-btn:hover{background:rgba(37,211,102,0.2)}
+.book-right{padding:60px 48px}
+.book-right h2{font-size:22px;font-weight:800;margin-bottom:6px}
+.book-right .sub{font-size:13px;color:var(--tm);margin-bottom:28px}
+/* Form */
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--td);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+.form-input{width:100%;background:rgba(254,254,254,0.07);border:0.5px solid var(--b);border-radius:9px;padding:13px 16px;font-size:14px;color:var(--nw);font-family:var(--f);transition:border-color .2s;outline:none}
+.form-input:focus{border-color:var(--ac3)}
+.form-input::placeholder{color:var(--td)}
+textarea.form-input{height:100px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-submit{width:100%;padding:15px;background:var(--gr);color:var(--nb);font-size:14.5px;font-weight:700;border-radius:10px;cursor:pointer;border:none;font-family:var(--f);transition:opacity .2s;margin-top:6px}
+.form-submit:hover{opacity:.88}
+.form-note{font-size:11.5px;color:var(--td);text-align:center;margin-top:10px}
+/* Mini testimonials */
+.mini-testis{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.mt-card{background:rgba(254,254,254,0.06);border:0.5px solid var(--b);border-radius:10px;padding:14px 16px}
+.mt-q{font-size:12.5px;color:var(--tm);line-height:1.6;font-style:italic;margin-bottom:8px}
+.mt-q::before{content:'\201C';color:var(--gr);font-size:14px;font-style:normal}
+.mt-by{font-size:11px;color:var(--td)}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET (≤ 1024px)
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  .nav{padding:0 28px}
+  .hero{padding:48px 28px;gap:24px;grid-template-columns:1fr 220px}
+  .hero h1{font-size:42px}
+  .ind-bar,.stats-bar .stat,.cta-section{padding-left:28px;padding-right:28px}
+  .stat{padding:28px}
+  .sec,.sec-sm{padding:52px 28px}
+  .svc-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proc-step{border-right:0.5px solid var(--b)}
+  .proc-step:nth-child(2n){border-right:none}
+  .proc-step:nth-child(3){border-top:0.5px solid var(--b)}
+  .proc-step:nth-child(4){border-top:0.5px solid var(--b)}
+  .cs-block{grid-template-columns:1fr}
+  .cs-left{border-right:none;border-bottom:0.5px solid var(--b)}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .footer{padding:40px 28px 20px;grid-template-columns:1.5fr 1fr 1fr}
+  .ft-bottom{margin:0 28px}
+  .footer .ft-col:last-child{grid-column:1 / -1}
+  .page-hero{padding:48px 28px}
+  .page-hero h1{font-size:38px}
+  .svc-detail{padding:40px 28px}
+  .svc-detail-inner{gap:28px}
+  .svc-delivers{grid-template-columns:1fr}
+  .cs-grid{grid-template-columns:1fr 1fr}
+  .cs-full-header{padding:40px 28px 0}
+  .cs-full-body{padding:32px 28px;grid-template-columns:1fr;gap:24px}
+  .cs-results-card{position:static}
+  .about-hero{padding:48px 28px;gap:28px}
+  .about-hero h1{font-size:36px}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .values-grid{grid-template-columns:1fr 1fr}
+  .founder-grid{padding:48px 28px;gap:28px}
+  .book-layout{grid-template-columns:1fr}
+  .book-left{border-right:none;border-bottom:0.5px solid var(--b)}
+  .book-left,.book-right{padding:40px 28px}
+  .cta-section{padding:0 28px 52px}
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 768px)
+═══════════════════════════════════════ */
+@media(max-width:768px){
+  /* Nav */
+  .nav{padding:0 20px;height:58px}
+  .nav-links{display:none}
+  .ham{display:flex}
+  /* Hero */
+  .hero{grid-template-columns:1fr;padding:40px 20px 32px;gap:28px}
+  .hero h1{font-size:36px}
+  .hero-sub{font-size:14px}
+  .hero-btns{flex-direction:column}
+  .hero-btns .btn-green,.hero-btns .btn-ghost{text-align:center;width:100%;padding:13px}
+  .hero-vis{flex-direction:row;flex-wrap:wrap;gap:10px}
+  .mc{flex:1;min-width:140px}
+  /* Industries */
+  .ind-bar{padding:16px 20px}
+  /* Stats */
+  .stats-bar{grid-template-columns:1fr}
+  .stat{padding:22px 20px;border-right:none;border-bottom:0.5px solid var(--b)}
+  .stat:last-child{border-bottom:none}
+  /* Sections */
+  .sec,.sec-sm{padding:40px 20px}
+  .stitle{font-size:28px}
+  /* Services */
+  .svc-grid{grid-template-columns:1fr}
+  /* Process */
+  .proc-grid{grid-template-columns:1fr}
+  .proc-step{border-right:none;border-bottom:0.5px solid var(--b)}
+  .proc-step:last-child{border-bottom:none}
+  .ps-conn{display:none}
+  /* CS block */
+  .cs-block{grid-template-columns:1fr}
+  .cs-left{border-right:none;border-bottom:0.5px solid var(--b)}
+  .cs-big{font-size:44px}
+  /* Testimonials */
+  .testi-grid{grid-template-columns:1fr}
+  /* CTA */
+  .cta-section{padding:0 20px 48px}
+  .cta-box{padding:36px 24px}
+  .cta-box h2{font-size:26px}
+  .cta-box .btn-dark{width:100%;text-align:center;padding:14px}
+  /* Footer */
+  .footer{grid-template-columns:1fr;padding:32px 20px 18px;gap:24px}
+  .ft-col:nth-child(2),.ft-col:nth-child(3),.ft-col:nth-child(4){display:none}
+  .ft-bottom{margin:0 20px;flex-direction:column;gap:6px;text-align:center}
+  /* Pages */
+  .page-hero{padding:40px 20px}
+  .page-hero h1{font-size:32px}
+  .svc-detail{padding:32px 20px}
+  .svc-detail-inner{grid-template-columns:1fr;gap:20px}
+  .svc-detail-inner.rev{direction:ltr}
+  .svc-delivers{grid-template-columns:1fr}
+  .cs-grid{grid-template-columns:1fr}
+  .cs-card-metric{font-size:34px}
+  .cs-full-header{padding:32px 20px 0}
+  .cs-full-metric{font-size:52px}
+  .cs-full-body{padding:24px 20px;grid-template-columns:1fr}
+  .about-hero{grid-template-columns:1fr;padding:40px 20px}
+  .about-hero h1{font-size:32px}
+  .about-vis{flex-direction:row;flex-wrap:wrap;gap:10px}
+  .about-stat-card{flex:1;min-width:130px}
+  .founder-grid{grid-template-columns:1fr;padding:36px 20px;gap:24px}
+  .founder-photo{aspect-ratio:auto;padding:32px}
+  .team-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .values-grid{grid-template-columns:1fr}
+  .book-left,.book-right{padding:32px 20px}
+  .book-left h1{font-size:30px}
+  .form-row{grid-template-columns:1fr}
+  .filter-tabs{gap:6px}
+  .ftab{font-size:11.5px;padding:6px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="main-nav">
+  <div class="nav-logo" onclick="goto('home')">ag<span>.</span>necy</div>
+  <div class="nav-links">
+    <span class="nav-lnk" onclick="goto('home')" data-page="home">Home</span>
+    <span class="nav-lnk" onclick="goto('services')" data-page="services">Services</span>
+    <span class="nav-lnk" onclick="goto('casestudies')" data-page="casestudies">Case Studies</span>
+    <span class="nav-lnk" onclick="goto('about')" data-page="about">About Us</span>
+    <button class="nav-btn" onclick="goto('book')">Book a Free Call →</button>
+  </div>
+  <div class="ham" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mob-menu">
+  <span class="mob-lnk" onclick="goto('home');toggleMenu()" data-mob="home">Home</span>
+  <span class="mob-lnk" onclick="goto('services');toggleMenu()" data-mob="services">Services</span>
+  <span class="mob-lnk" onclick="goto('casestudies');toggleMenu()" data-mob="casestudies">Case Studies</span>
+  <span class="mob-lnk" onclick="goto('about');toggleMenu()" data-mob="about">About Us</span>
+  <button class="mob-btn" onclick="goto('book');toggleMenu()">Book a Free Call →</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: HOME
+═══════════════════════════════════════ -->
+<div id="page-home" class="page-enter">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div><div class="hero-glow2"></div>
+    <div class="a1">
+      <div class="eyebrow"><div class="ed"></div>Performance Marketing Agency</div>
+      <h1>Ads that grow.<br>Content that<br><em>converts.</em></h1>
+      <p class="hero-sub">We help businesses scale with Google Ads, Meta Ads, and SEO & Content — built on real results, not vanity metrics.</p>
+      <div class="hero-btns">
+        <button class="btn-green" onclick="goto('book')">Book a Free Strategy Call →</button>
+        <button class="btn-ghost" onclick="goto('casestudies')">See Our Work</button>
+      </div>
+    </div>
+    <div class="hero-vis a2">
+      <div class="mc fl0"><div class="mc-lbl">Meta Ads · E-commerce</div><div class="mc-val">2.8×</div><div class="mc-meta">↑ ROAS in 45 days</div></div>
+      <div class="mc fl1"><div class="mc-lbl">Google Ads · Local Services</div><div class="mc-val">43%</div><div class="mc-meta neg">↓ Cost per lead · 60 days</div></div>
+      <div class="mc fl2"><div class="mc-lbl">SEO · Healthcare</div><div class="mc-val">#1</div><div class="mc-meta">↑ Ranked in 90 days</div></div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <div class="ind-bar a3">
+    <div class="ind-lbl">Industries we've worked across</div>
+    <div class="ind-tw">
+      <div class="ind-tr">
+        <span class="itag">E-commerce</span><span class="itag">Healthcare</span><span class="itag">Real Estate</span><span class="itag">Education</span><span class="itag">Finance</span><span class="itag">Local Services</span><span class="itag">SaaS / Tech</span><span class="itag">Hospitality</span><span class="itag">D2C Brands</span><span class="itag">Professional Services</span>
+        <span class="itag">E-commerce</span><span class="itag">Healthcare</span><span class="itag">Real Estate</span><span class="itag">Education</span><span class="itag">Finance</span><span class="itag">Local Services</span><span class="itag">SaaS / Tech</span><span class="itag">Hospitality</span><span class="itag">D2C Brands</span><span class="itag">Professional Services</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar a4">
+    <div class="stat"><div class="stat-n">₹5<span>Cr+</span></div><div class="stat-l">Ad Spend Managed</div></div>
+    <div class="stat"><div class="stat-n">40<span>+</span></div><div class="stat-l">Projects Delivered</div></div>
+    <div class="stat"><div class="stat-n">3.2<span>×</span></div><div class="stat-l">Avg. ROAS Achieved</div></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="sec">
+    <div class="sh">
+      <div class="stag">What we do</div>
+      <h2 class="stitle">Three services.<br>One growth goal.</h2>
+      <p class="ssub">Every service is built for one outcome — measurable, scalable growth for your business.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card" onclick="goto('services')">
+        <div class="svc-icon">🔍</div>
+        <div class="svc-name">SEO & Content Writing</div>
+        <div class="svc-desc">Rank higher, attract the right audience, and turn readers into customers.</div>
+        <div class="svc-list"><div class="svc-li">On-page & technical SEO</div><div class="svc-li">Blog & article writing</div><div class="svc-li">Keyword strategy</div><div class="svc-li">Local SEO</div></div>
+        <div class="svc-lnk">Learn more →</div>
+      </div>
+      <div class="svc-card" onclick="goto('services')">
+        <div class="svc-icon">📱</div>
+        <div class="svc-name">Meta Ads</div>
+        <div class="svc-desc">Facebook & Instagram campaigns engineered for leads, ROAS, and scalable growth.</div>
+        <div class="svc-list"><div class="svc-li">Lead gen & retargeting</div><div class="svc-li">Creative strategy</div><div class="svc-li">CAPI / server-side tracking</div><div class="svc-li">Audience research</div></div>
+        <div class="svc-lnk">Learn more →</div>
+      </div>
+      <div class="svc-card" onclick="goto('services')">
+        <div class="svc-icon">🎯</div>
+        <div class="svc-name">Google Ads</div>
+        <div class="svc-desc">Search, Display, and Performance Max that bring in high-intent buyers.</div>
+        <div class="svc-list"><div class="svc-li">Search & Display</div><div class="svc-li">Performance Max</div><div class="svc-li">Shopping campaigns</div><div class="svc-li">Remarketing</div></div>
+        <div class="svc-lnk">Learn more →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sec sec-dark" style="padding-top:0">
+    <div class="sh">
+      <div class="stag">Our process</div>
+      <h2 class="stitle">How we work</h2>
+      <p class="ssub">A clear 4-step process so you always know what's happening and what comes next.</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-step"><div class="ps-num">01 —</div><div class="ps-name">Free Audit</div><div class="ps-desc">We review your setup and find what's working and what's leaking money.</div><div class="ps-conn"></div></div>
+      <div class="proc-step"><div class="ps-num">02 —</div><div class="ps-name">Strategy</div><div class="ps-desc">A tailored 90-day growth plan — no templates, no guesswork.</div><div class="ps-conn"></div></div>
+      <div class="proc-step"><div class="ps-num">03 —</div><div class="ps-name">Launch & Optimise</div><div class="ps-desc">We launch, test, and optimise continuously — tracking every rupee.</div><div class="ps-conn"></div></div>
+      <div class="proc-step"><div class="ps-num">04 —</div><div class="ps-name">Report & Scale</div><div class="ps-desc">Monthly reports, full dashboard access, and a clear path to scale.</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURED CASE STUDY -->
+  <section class="sec" style="padding-top:0">
+    <div class="sh">
+      <div class="stag">Featured result</div>
+      <h2 class="stitle">Real work. Real numbers.</h2>
+    </div>
+    <div class="cs-block">
+      <div class="cs-left">
+        <div class="cs-tags"><span class="atag">E-commerce</span><span class="atag">Meta Ads</span></div>
+        <div class="cs-big">43<span>%</span></div>
+        <div class="cs-sub">Drop in cost per lead</div>
+        <p class="cs-body">A D2C skincare brand came to us with a ₹1L/month Meta budget and a CPL of ₹800. We restructured campaigns, rebuilt their creative strategy, and implemented server-side tracking. In 60 days, CPL dropped to ₹290 — monthly leads nearly tripled.</p>
+        <span class="cs-lnk" onclick="goto('casestudies')">Read full case study →</span>
+      </div>
+      <div class="cs-right">
+        <div class="mr-row"><span class="mr-lbl">Cost per lead</span><div class="mr-vals"><span class="mr-before">₹800</span><span class="mr-arrow">→</span><span class="mr-after">₹290</span></div></div>
+        <div class="mr-row"><span class="mr-lbl">ROAS</span><div class="mr-vals"><span class="mr-before">1.4×</span><span class="mr-arrow">→</span><span class="mr-after">3.1×</span></div></div>
+        <div class="mr-row"><span class="mr-lbl">Monthly leads</span><div class="mr-vals"><span class="mr-before">42</span><span class="mr-arrow">→</span><span class="mr-after">118</span></div></div>
+        <div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">60 days</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="sec sec-dark" style="padding-top:0">
+    <div class="sh">
+      <div class="stag">What clients say</div>
+      <h2 class="stitle">Trusted by founders<br>&amp; marketing teams.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-q">The first strategy call gave us three ideas we implemented that same week. Rare to work with an agency that actually prepares before the call.</p><div class="tcard-author"><div class="tcard-av">RA</div><div><div class="tcard-name">Rahul A.</div><div class="tcard-role">Founder · E-commerce brand</div></div></div></div>
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-q">Our Google Ads were bleeding money. They restructured everything in two weeks — leads at half the cost, and reporting is incredibly transparent.</p><div class="tcard-author"><div class="tcard-av">SM</div><div><div class="tcard-name">Sneha M.</div><div class="tcard-role">Marketing Head · Healthcare startup</div></div></div></div>
+      <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-q">Our blog now drives 60% of our inbound leads. The content strategy didn't just rank — it converted visitors into demos.</p><div class="tcard-author"><div class="tcard-av">PK</div><div><div class="tcard-name">Priya K.</div><div class="tcard-role">Co-founder · SaaS company</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-box">
+      <h2>Ready to grow your business?</h2>
+      <p>Book a free 30-minute strategy call. No pitch. No pressure. Just a clear growth plan.</p>
+      <button class="btn-dark" onclick="goto('book')">Book My Free Strategy Call →</button>
+      <div class="cta-note">Usually responds within 2 hours · 30 min · No commitment needed</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div><div class="ft-logo">ag<span>.</span>necy</div><p class="ft-tagline">Performance marketing for businesses serious about growth.</p><div class="ft-soc"><div class="ft-si">in</div><div class="ft-si">tw</div><div class="ft-si">ig</div></div></div>
+    <div class="ft-col"><h4>Services</h4><ul><li onclick="goto('services')">SEO & Content Writing</li><li onclick="goto('services')">Meta Ads</li><li onclick="goto('services')">Google Ads</li></ul></div>
+    <div class="ft-col"><h4>Company</h4><ul><li onclick="goto('about')">About Us</li><li onclick="goto('casestudies')">Case Studies</li><li onclick="goto('book')">Book a Free Call</li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li>hello@agnecy.in</li><li>WhatsApp Us</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Agnecy. All rights reserved.</p><span>Privacy Policy</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: SERVICES
+═══════════════════════════════════════ -->
+<div id="page-services" style="display:none">
+
+  <div class="page-hero">
+    <div class="stag a1">What we do</div>
+    <h1 class="a2">Performance marketing<br>that pays for itself.</h1>
+    <p class="a3" style="font-size:15px;color:var(--tm);max-width:520px;line-height:1.7;margin-top:12px">Every service we offer is built around one principle — your results come first. Data over opinions, always.</p>
+  </div>
+
+  <!-- SEO -->
+  <div class="svc-detail">
+    <div class="svc-detail-inner">
+      <div>
+        <div class="svc-detail-icon">🔍</div>
+        <h2>SEO & Content Writing</h2>
+        <p class="svc-detail-desc">Rank on page one for the terms your customers are searching, and stay there. We combine technical SEO with content that actually converts — not just content that fills pages.</p>
+        <p class="svc-detail-desc">Our content writers understand both search algorithms and human psychology. Every article we write is designed to rank, engage, and convert.</p>
+        <div class="svc-delivers">
+          <div class="svc-del-item">On-page optimisation</div>
+          <div class="svc-del-item">Technical SEO audit</div>
+          <div class="svc-del-item">Blog & article writing</div>
+          <div class="svc-del-item">Keyword research & mapping</div>
+          <div class="svc-del-item">Local SEO</div>
+          <div class="svc-del-item">Link building strategy</div>
+          <div class="svc-del-item">Content calendar planning</div>
+          <div class="svc-del-item">Monthly ranking reports</div>
+        </div>
+        <button class="btn-green" onclick="goto('book')">Get a Free SEO Audit →</button>
+        <div class="tools-grid" style="margin-top:20px">
+          <span class="tool-chip">Ahrefs</span><span class="tool-chip">SEMrush</span><span class="tool-chip">Search Console</span><span class="tool-chip">GA4</span><span class="tool-chip">Screaming Frog</span>
+        </div>
+      </div>
+      <div class="svc-detail-right">
+        <h3>Typical results</h3>
+        <div class="metric">
+          <div class="metric-item"><span>Avg. organic traffic increase</span><span>+180%</span></div>
+          <div class="metric-item"><span>Avg. time to first ranking</span><span>60–90 days</span></div>
+          <div class="metric-item"><span>Blog conversion rate</span><span>3–6%</span></div>
+          <div class="metric-item"><span>Content pieces/month</span><span>4–12</span></div>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(165,218,118,0.08);border:0.5px solid var(--ac3);border-radius:9px">
+          <p style="font-size:12.5px;color:var(--tm);line-height:1.6;font-style:italic">"Our blog now drives 60% of our inbound leads."<br><span style="font-size:11px;color:var(--td);font-style:normal;margin-top:4px;display:block">— Priya K., SaaS Co-founder</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- META ADS -->
+  <div class="svc-detail">
+    <div class="svc-detail-inner rev">
+      <div>
+        <div class="svc-detail-icon">📱</div>
+        <h2>Meta Ads</h2>
+        <p class="svc-detail-desc">Facebook and Instagram advertising that goes beyond boosted posts. We build full-funnel Meta campaigns — from awareness to conversion — with creative strategy built in from day one.</p>
+        <p class="svc-detail-desc">We implement server-side tracking via Conversions API (CAPI) so your data is accurate and your targeting is sharper — especially in a post-iOS14 world.</p>
+        <div class="svc-delivers">
+          <div class="svc-del-item">Campaign strategy & setup</div>
+          <div class="svc-del-item">Lead gen campaigns</div>
+          <div class="svc-del-item">Retargeting funnels</div>
+          <div class="svc-del-item">Creative strategy & briefs</div>
+          <div class="svc-del-item">CAPI / server-side tracking</div>
+          <div class="svc-del-item">Audience research</div>
+          <div class="svc-del-item">A/B testing</div>
+          <div class="svc-del-item">Weekly performance reports</div>
+        </div>
+        <button class="btn-green" onclick="goto('book')">Get a Free Meta Ads Audit →</button>
+        <div class="tools-grid" style="margin-top:20px">
+          <span class="tool-chip">Meta Ads Manager</span><span class="tool-chip">Meta CAPI</span><span class="tool-chip">GA4</span><span class="tool-chip">Google Tag Manager</span>
+        </div>
+      </div>
+      <div class="svc-detail-right">
+        <h3>Typical results</h3>
+        <div class="metric">
+          <div class="metric-item"><span>Avg. CPL reduction</span><span>35–55%</span></div>
+          <div class="metric-item"><span>Avg. ROAS improvement</span><span>2.5–4×</span></div>
+          <div class="metric-item"><span>Time to optimised campaigns</span><span>30 days</span></div>
+          <div class="metric-item"><span>Event Match Quality score</span><span>7.5+/10</span></div>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(165,218,118,0.08);border:0.5px solid var(--ac3);border-radius:9px">
+          <p style="font-size:12.5px;color:var(--tm);line-height:1.6;font-style:italic">"CPL dropped from ₹800 to ₹290 in 60 days."<br><span style="font-size:11px;color:var(--td);font-style:normal;margin-top:4px;display:block">— D2C Skincare brand, E-commerce</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE ADS -->
+  <div class="svc-detail">
+    <div class="svc-detail-inner">
+      <div>
+        <div class="svc-detail-icon">🎯</div>
+        <h2>Google Ads</h2>
+        <p class="svc-detail-desc">Put your business in front of people who are actively searching for what you offer. We manage Search, Display, Performance Max, Shopping, and Remarketing campaigns with a focus on ROI — not just clicks.</p>
+        <p class="svc-detail-desc">We audit your existing account structure, fix wasteful spend, and rebuild campaigns that convert high-intent queries into paying customers.</p>
+        <div class="svc-delivers">
+          <div class="svc-del-item">Search campaigns</div>
+          <div class="svc-del-item">Display advertising</div>
+          <div class="svc-del-item">Performance Max</div>
+          <div class="svc-del-item">Shopping campaigns</div>
+          <div class="svc-del-item">Remarketing</div>
+          <div class="svc-del-item">Conversion tracking setup</div>
+          <div class="svc-del-item">Negative keyword management</div>
+          <div class="svc-del-item">Monthly CPA reports</div>
+        </div>
+        <button class="btn-green" onclick="goto('book')">Get a Free Google Ads Audit →</button>
+        <div class="tools-grid" style="margin-top:20px">
+          <span class="tool-chip">Google Ads</span><span class="tool-chip">GA4</span><span class="tool-chip">Search Console</span><span class="tool-chip">Google Tag Manager</span>
+        </div>
+      </div>
+      <div class="svc-detail-right">
+        <h3>Typical results</h3>
+        <div class="metric">
+          <div class="metric-item"><span>Avg. CPA reduction</span><span>30–50%</span></div>
+          <div class="metric-item"><span>Avg. CTR improvement</span><span>+65%</span></div>
+          <div class="metric-item"><span>Wasted spend eliminated</span><span>20–40%</span></div>
+          <div class="metric-item"><span>Time to campaign launch</span><span>7–10 days</span></div>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(165,218,118,0.08);border:0.5px solid var(--ac3);border-radius:9px">
+          <p style="font-size:12.5px;color:var(--tm);line-height:1.6;font-style:italic">"They restructured in 2 weeks — leads at half the cost."<br><span style="font-size:11px;color:var(--td);font-style:normal;margin-top:4px;display:block">— Sneha M., Healthcare startup</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDUSTRIES + CTA -->
+  <section class="sec">
+    <div class="sh">
+      <div class="stag">Industries we serve</div>
+      <h2 class="stitle">We've worked across<br>these industries.</h2>
+      <p class="ssub">Industry knowledge means faster strategies, sharper targeting, and better results from day one.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px">
+      <span class="itag" style="font-size:13px;padding:8px 18px">E-commerce</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Healthcare</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Real Estate</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Education</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Finance</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Local Services</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">SaaS / Tech</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Hospitality</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">D2C Brands</span>
+      <span class="itag" style="font-size:13px;padding:8px 18px">Professional Services</span>
+    </div>
+    <div class="cta-box" style="text-align:left;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="position:relative;z-index:1">
+        <h2 style="font-size:26px;margin-bottom:6px">Not sure which service fits?</h2>
+        <p style="margin-bottom:0">Let's talk and figure out the best approach for your goals.</p>
+      </div>
+      <button class="btn-dark" onclick="goto('book')" style="position:relative;z-index:1;white-space:nowrap">Book a Free Consultation →</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div><div class="ft-logo">ag<span>.</span>necy</div><p class="ft-tagline">Performance marketing for businesses serious about growth.</p><div class="ft-soc"><div class="ft-si">in</div><div class="ft-si">tw</div><div class="ft-si">ig</div></div></div>
+    <div class="ft-col"><h4>Services</h4><ul><li>SEO & Content Writing</li><li>Meta Ads</li><li>Google Ads</li></ul></div>
+    <div class="ft-col"><h4>Company</h4><ul><li onclick="goto('about')">About Us</li><li onclick="goto('casestudies')">Case Studies</li><li onclick="goto('book')">Book a Free Call</li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li>hello@agnecy.in</li><li>WhatsApp Us</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Agnecy. All rights reserved.</p><span>Privacy Policy</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: CASE STUDIES
+═══════════════════════════════════════ -->
+<div id="page-casestudies" style="display:none">
+
+  <div class="page-hero">
+    <div class="stag a1">Proof of work</div>
+    <h1 class="a2">Real projects.<br>Measurable results.</h1>
+    <p class="a3" style="font-size:15px;color:var(--tm);max-width:520px;line-height:1.7;margin-top:12px">We let the numbers speak — across every industry and every service we offer. No vanity metrics.</p>
+  </div>
+
+  <section class="sec" style="padding-top:36px">
+    <div class="filter-tabs" id="cs-filters">
+      <span class="ftab active" onclick="filterCS('all',this)">All</span>
+      <span class="ftab" onclick="filterCS('seo',this)">SEO & Content</span>
+      <span class="ftab" onclick="filterCS('meta',this)">Meta Ads</span>
+      <span class="ftab" onclick="filterCS('google',this)">Google Ads</span>
+    </div>
+    <div class="cs-grid" id="cs-grid">
+      <div class="cs-card" data-tags="meta ecommerce" onclick="openCS('cs1')">
+        <div class="cs-card-tags"><span class="atag">E-commerce</span><span class="atag">Meta Ads</span></div>
+        <div class="cs-card-metric">43<span>%</span></div>
+        <div class="cs-card-title">Drop in cost per lead</div>
+        <div class="cs-card-desc">D2C skincare brand cut CPL from ₹800 to ₹290 in just 60 days through campaign restructure and CAPI setup.</div>
+        <span class="cs-card-lnk">Read case study →</span>
+      </div>
+      <div class="cs-card" data-tags="google local" onclick="openCS('cs2')">
+        <div class="cs-card-tags"><span class="atag">Local Services</span><span class="atag">Google Ads</span></div>
+        <div class="cs-card-metric">2.1<span>×</span></div>
+        <div class="cs-card-title">More qualified leads, same budget</div>
+        <div class="cs-card-desc">A home services company doubled qualified leads without increasing their monthly ad spend through better campaign structure.</div>
+        <span class="cs-card-lnk">Read case study →</span>
+      </div>
+      <div class="cs-card" data-tags="seo healthcare" onclick="openCS('cs3')">
+        <div class="cs-card-tags"><span class="atag">Healthcare</span><span class="atag">SEO</span></div>
+        <div class="cs-card-metric">#1</div>
+        <div class="cs-card-title">Ranking for 12 target keywords</div>
+        <div class="cs-card-desc">A healthcare clinic went from page 3 to #1 for their primary search terms, driving 180% more organic traffic in 90 days.</div>
+        <span class="cs-card-lnk">Read case study →</span>
+      </div>
+      <div class="cs-card" data-tags="meta realestate" onclick="openCS('cs4')">
+        <div class="cs-card-tags"><span class="atag">Real Estate</span><span class="atag">Meta Ads</span></div>
+        <div class="cs-card-metric">₹180</div>
+        <div class="cs-card-title">Cost per qualified property lead</div>
+        <div class="cs-card-desc">Real estate developer reduced lead cost from ₹650 to ₹180 for high-ticket property inquiries through precise audience targeting.</div>
+        <span class="cs-card-lnk">Read case study →</span>
+      </div>
+      <div class="cs-card" data-tags="seo saas" onclick="openCS('cs5')">
+        <div class="cs-card-tags"><span class="atag">SaaS</span><span class="atag">SEO & Content</span></div>
+        <div class="cs-card-metric">60<span>%</span></div>
+        <div class="cs-card-title">Of inbound leads from blog</div>
+        <div class="cs-card-desc">SaaS company's content strategy turned their blog into their #1 lead source, generating 60% of all inbound demos.</div>
+        <span class="cs-card-lnk">Read case study →</span>
+      </div>
+      <div class="cs-card" data-tags="google ecommerce" onclick="openCS('cs6')">
+        <div class="cs-card-tags"><span class="atag">E-commerce</span><span class="atag">Google Ads</span></div>
+        <div class="cs-card-metric">3.8<span>×</span></div>
+        <div class="cs-card-title">Return on ad spend (ROAS)</div>
+        <div class="cs-card-desc">Online fashion brand grew ROAS from 1.2× to 3.8× in 45 days through shopping campaign restructure and Performance Max.</div>
+        <span class="cs-card-lnk">Read case study →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Individual CS modal/section -->
+  <div id="cs-detail" style="display:none">
+    <div class="cs-full-header">
+      <span class="cs-back" onclick="closeCS()">← Back to case studies</span>
+      <div id="cs-detail-tags" class="cs-tags"></div>
+      <div class="cs-full-metric" id="cs-detail-metric"></div>
+      <div class="cs-sub" id="cs-detail-title" style="font-size:24px;margin-bottom:0"></div>
+    </div>
+    <div class="cs-full-body">
+      <div id="cs-detail-story"></div>
+      <div>
+        <div class="cs-results-card">
+          <h3>Results at a glance</h3>
+          <div id="cs-detail-results"></div>
+        </div>
+        <div class="cs-testi" id="cs-detail-testi"></div>
+      </div>
+    </div>
+    <div style="padding:0 48px 32px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-green" onclick="goto('book')">Get similar results →</button>
+      <button class="btn-ghost" onclick="closeCS()">← All case studies</button>
+    </div>
+  </div>
+
+  <div id="cs-list-view">
+    <div class="cta-section" style="padding-top:0">
+      <div class="cta-box">
+        <h2>Your business could be<br>our next case study.</h2>
+        <p>Book a free 30-minute call. Let's talk about your goals.</p>
+        <button class="btn-dark" onclick="goto('book')">Book a Free Consultation →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div><div class="ft-logo">ag<span>.</span>necy</div><p class="ft-tagline">Performance marketing for businesses serious about growth.</p><div class="ft-soc"><div class="ft-si">in</div><div class="ft-si">tw</div><div class="ft-si">ig</div></div></div>
+    <div class="ft-col"><h4>Services</h4><ul><li onclick="goto('services')">SEO & Content Writing</li><li onclick="goto('services')">Meta Ads</li><li onclick="goto('services')">Google Ads</li></ul></div>
+    <div class="ft-col"><h4>Company</h4><ul><li onclick="goto('about')">About Us</li><li>Case Studies</li><li onclick="goto('book')">Book a Free Call</li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li>hello@agnecy.in</li><li>WhatsApp Us</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Agnecy. All rights reserved.</p><span>Privacy Policy</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: ABOUT
+═══════════════════════════════════════ -->
+<div id="page-about" style="display:none">
+
+  <div class="about-hero">
+    <div class="a1">
+      <div class="stag">Who we are</div>
+      <h1>We don't just run ads.<br>We build growth systems.</h1>
+      <p style="font-size:15px;color:var(--tm);line-height:1.7;margin-top:14px">Agnecy is a performance marketing agency built on one belief — every rupee you spend should work harder than the last. We measure everything, optimise relentlessly, and report transparently.</p>
+      <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+        <button class="btn-green" onclick="goto('book')">Work with us →</button>
+        <button class="btn-ghost" onclick="goto('services')">Our services</button>
+      </div>
+    </div>
+    <div class="about-vis a2">
+      <div class="about-stat-card"><div class="about-stat-n">₹5<span>Cr+</span></div><div class="about-stat-l">Ad Spend Managed</div></div>
+      <div class="about-stat-card"><div class="about-stat-n">40<span>+</span></div><div class="about-stat-l">Projects Delivered</div></div>
+      <div class="about-stat-card"><div class="about-stat-n">3<span>+</span></div><div class="about-stat-l">Years of Experience</div></div>
+      <div class="about-stat-card"><div class="about-stat-n">10<span>+</span></div><div class="about-stat-l">Industries Served</div></div>
+    </div>
+  </div>
+
+  <!-- FOUNDER -->
+  <div class="founder-grid">
+    <div class="founder-photo">
+      <div class="founder-photo-initials">MA</div>
+      <div class="founder-photo-label">Manoj — Founder & Lead Strategist</div>
+    </div>
+    <div class="founder-content">
+      <h2>Built by someone who's been on both sides.</h2>
+      <div class="title">🎯 Founder & Lead Strategist · Agnecy</div>
+      <p>I started Agnecy because I kept seeing businesses waste money on ads that weren't working — not because the platforms don't work, but because the strategy was broken. Generic campaigns, no tracking, and agencies that optimised for their own metrics rather than client results.</p>
+      <p>I've managed campaigns across 8+ industries and helped businesses from local service providers to D2C brands scale their ad spend profitably. Every client I work with gets the same thing: full transparency, data-driven decisions, and a team that treats your budget like it's their own money.</p>
+      <p>When I'm not building campaigns, I'm a member of the Global Shapers Ajmer Hub — a World Economic Forum initiative focused on community development. I believe businesses that grow responsibly build the strongest foundations.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px">
+        <span class="tool-chip">Google Ads Certified</span>
+        <span class="tool-chip">Meta Blueprint</span>
+        <span class="tool-chip">GA4 Certified</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <section class="sec">
+    <div class="sh">
+      <div class="stag">The team</div>
+      <h2 class="stitle">Small team. Big output.</h2>
+      <p class="ssub">Every person on our team is a specialist — no account managers who don't touch your campaigns.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-av">MA</div><div class="team-name">Manoj A.</div><div class="team-role">Founder & Lead Strategist</div><div class="team-bio">Campaign strategy, client growth, and overall account ownership.</div></div>
+      <div class="team-card"><div class="team-av">PL</div><div class="team-name">Palak</div><div class="team-role">Campaign Execution</div><div class="team-bio">Day-to-day campaign management, optimisation, and performance monitoring.</div></div>
+      <div class="team-card"><div class="team-av">RA</div><div class="team-name">Rahul</div><div class="team-role">Web & Landing Pages</div><div class="team-bio">Landing page development, tracking setup, and conversion optimisation.</div></div>
+      <div class="team-card"><div class="team-av">AV</div><div class="team-name">Avinash</div><div class="team-role">Web Manager</div><div class="team-bio">Website management, technical SEO implementation, and analytics.</div></div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="sec sec-dark" style="padding-top:0">
+    <div class="sh">
+      <div class="stag">How we operate</div>
+      <h2 class="stitle">Three values we<br>live by every day.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="val-card">
+        <div class="val-icon">📊</div>
+        <div class="val-name">Data over opinions</div>
+        <div class="val-desc">Every decision we make is backed by data — not gut feeling, not what worked for another client, and not what looks nice.</div>
+        <div class="val-practice">In practice: Every recommendation comes with a data point.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🔍</div>
+        <div class="val-name">Radical transparency</div>
+        <div class="val-desc">You get full access to your dashboards, ad accounts, and reports. We never hold your data hostage or hide poor performance.</div>
+        <div class="val-practice">In practice: You can log into your accounts anytime, day or night.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">📈</div>
+        <div class="val-name">Long-term over quick wins</div>
+        <div class="val-desc">We build strategies designed to compound over time — not campaigns that spike once and die. Your growth should be sustainable.</div>
+        <div class="val-practice">In practice: We plan in 90-day cycles, not one-off campaigns.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="sec" style="padding-top:0">
+    <div class="sh">
+      <div class="stag">Credentials</div>
+      <h2 class="stitle">Certified & verified.</h2>
+      <p class="ssub">We stay current on every platform we manage — so your campaigns use the latest features and best practices.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-chip">🎯 Google Ads Certified</div>
+      <div class="cert-chip">📱 Meta Blueprint Certified</div>
+      <div class="cert-chip">📊 Google Analytics 4</div>
+      <div class="cert-chip">🏷️ Google Tag Manager</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-box">
+      <h2>Let's build something together.</h2>
+      <p>Book a free 30-minute call. No pitch. Just a real conversation about your growth.</p>
+      <button class="btn-dark" onclick="goto('book')">Book a Free Consultation →</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div><div class="ft-logo">ag<span>.</span>necy</div><p class="ft-tagline">Performance marketing for businesses serious about growth.</p><div class="ft-soc"><div class="ft-si">in</div><div class="ft-si">tw</div><div class="ft-si">ig</div></div></div>
+    <div class="ft-col"><h4>Services</h4><ul><li onclick="goto('services')">SEO & Content Writing</li><li onclick="goto('services')">Meta Ads</li><li onclick="goto('services')">Google Ads</li></ul></div>
+    <div class="ft-col"><h4>Company</h4><ul><li>About Us</li><li onclick="goto('casestudies')">Case Studies</li><li onclick="goto('book')">Book a Free Call</li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li>hello@agnecy.in</li><li>WhatsApp Us</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Agnecy. All rights reserved.</p><span>Privacy Policy</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE: BOOK A CALL
+═══════════════════════════════════════ -->
+<div id="page-book" style="display:none">
+  <div class="book-layout">
+    <div class="book-left">
+      <div class="stag a1">Free consultation</div>
+      <h1 class="a2">Book your free<br>30-minute strategy call.</h1>
+      <p class="a3">No pitch. No pressure. Just a clear, honest look at your current setup and a growth plan tailored to your goals.</p>
+      <div class="book-perks a3">
+        <div class="perk"><div class="perk-icon">✓</div><span>We'll review your current ads or SEO setup and spot what's leaking money</span></div>
+        <div class="perk"><div class="perk-icon">🗺</div><span>You'll walk away with a clear 90-day action plan — even if you don't work with us</span></div>
+        <div class="perk"><div class="perk-icon">⏱</div><span>30 minutes. No commitment. No follow-up pressure calls.</span></div>
+      </div>
+      <div class="book-steps a4">
+        <div class="book-step"><div class="book-step-n">1</div><div class="book-step-text"><h4>Fill the form</h4><p>Tell us about your project so we can prepare before the call.</p></div></div>
+        <div class="book-step"><div class="book-step-n">2</div><div class="book-step-text"><h4>Get a WhatsApp confirmation</h4><p>We'll send 2 quick prep questions to make the call more productive.</p></div></div>
+        <div class="book-step"><div class="book-step-n">3</div><div class="book-step-text"><h4>Join the call</h4><p>30 minutes. Real insights. A clear plan for what comes next.</p></div></div>
+      </div>
+      <div class="wa-btn a5">
+        <span style="font-size:18px">💬</span>
+        <span>Prefer WhatsApp? Message us directly</span>
+      </div>
+      <!-- Mini testimonials -->
+      <div class="mini-testis" style="margin-top:28px">
+        <div class="mt-card"><p class="mt-q">The first call gave us 3 ideas we implemented that same week."</p><div class="mt-by">— Rahul A., Founder · E-commerce brand</div></div>
+        <div class="mt-card"><p class="mt-q">Most useful 30 minutes I've spent this quarter."</p><div class="mt-by">— Sneha M., Marketing Head · Healthcare startup</div></div>
+      </div>
+    </div>
+    <div class="book-right">
+      <h2>Tell us about your project</h2>
+      <p class="sub">We'll review your details before the call so we come prepared — not blank.</p>
+      <div class="form-group">
+        <label>Full name</label>
+        <input class="form-input" type="text" placeholder="Your name">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email address</label>
+          <input class="form-input" type="email" placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp number</label>
+          <input class="form-input" type="tel" placeholder="+91 98765 43210">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Business / website URL</label>
+        <input class="form-input" type="url" placeholder="www.yourbusiness.com">
+      </div>
+      <div class="form-group">
+        <label>Tell us about your project</label>
+        <textarea class="form-input" placeholder="What are you currently doing for marketing? What's not working? What are your goals? The more context you give us, the more useful the call will be."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Claim My Free Strategy Call →</button>
+      <div class="form-note">Usually responds within 2 hours · No spam · Your data stays private</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div><div class="ft-logo">ag<span>.</span>necy</div><p class="ft-tagline">Performance marketing for businesses serious about growth.</p><div class="ft-soc"><div class="ft-si">in</div><div class="ft-si">tw</div><div class="ft-si">ig</div></div></div>
+    <div class="ft-col"><h4>Services</h4><ul><li onclick="goto('services')">SEO & Content Writing</li><li onclick="goto('services')">Meta Ads</li><li onclick="goto('services')">Google Ads</li></ul></div>
+    <div class="ft-col"><h4>Company</h4><ul><li onclick="goto('about')">About Us</li><li onclick="goto('casestudies')">Case Studies</li><li>Book a Free Call</li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li>hello@agnecy.in</li><li>WhatsApp Us</li></ul></div>
+  </footer>
+  <div class="ft-bottom"><p>© 2025 Agnecy. All rights reserved.</p><span>Privacy Policy</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT ROUTER
+═══════════════════════════════════════ -->
+<script>
+const pages = ['home','services','casestudies','about','book'];
+let currentPage = 'home';
+
+function goto(page){
+  pages.forEach(p => {
+    const el = document.getElementById('page-'+p);
+    if(el) el.style.display = 'none';
+  });
+  const target = document.getElementById('page-'+page);
+  if(target){
+    target.style.display = 'block';
+    target.classList.remove('page-enter');
+    void target.offsetWidth;
+    target.classList.add('page-enter');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  currentPage = page;
+  // Update nav active states
+  document.querySelectorAll('.nav-lnk').forEach(el => {
+    el.classList.toggle('active', el.dataset.page === page);
+  });
+  document.querySelectorAll('.mob-lnk').forEach(el => {
+    el.classList.toggle('active', el.dataset.mob === page);
+  });
+  // Reset CS view
+  if(page === 'casestudies') closeCS();
+}
+
+function toggleMenu(){
+  const ham = document.getElementById('ham');
+  const menu = document.getElementById('mob-menu');
+  ham.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+
+// Case study data
+const csData = {
+  cs1:{
+    metric:'43%', title:'Drop in cost per lead',
+    tags:'<span class="atag">E-commerce</span><span class="atag">Meta Ads</span>',
+    story:`
+      <div class="cs-story-section"><h3>The challenge</h3><p>A D2C skincare brand was spending ₹1L/month on Meta Ads with a CPL of ₹800 — far above their profitable threshold of ₹400. They'd tried boosting posts and running broad campaigns, but nothing stuck.</p></div>
+      <div class="cs-story-section"><h3>Our strategy</h3><p>We audited their entire account and found three issues: no retargeting funnel, no server-side tracking (post-iOS14 this was causing 40% of conversions to go untracked), and creative fatigue across all ad sets. We rebuilt from scratch.</p></div>
+      <div class="cs-story-section"><h3>Execution</h3><p>We implemented Meta CAPI for server-side tracking, built a 3-stage funnel (awareness → retargeting → purchase), refreshed creative with UGC-style videos, and tightened audience targeting to high-intent lookalikes. Campaign went live in 10 days.</p></div>
+    `,
+    results:`
+      <div class="mr-row"><span class="mr-lbl">Cost per lead</span><div class="mr-vals"><span class="mr-before">₹800</span><span class="mr-arrow">→</span><span class="mr-after">₹290</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">ROAS</span><div class="mr-vals"><span class="mr-before">1.4×</span><span class="mr-arrow">→</span><span class="mr-after">3.1×</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Monthly leads</span><div class="mr-vals"><span class="mr-before">42</span><span class="mr-arrow">→</span><span class="mr-after">118</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">60 days</span></div></div>
+    `,
+    testi:`<p class="cs-testi-q">They came in, fixed what we couldn't figure out in 6 months, and delivered results in 60 days. The CAPI setup alone made a massive difference to our data accuracy."</p><div style="font-size:11.5px;color:var(--td)">— Founder · D2C Skincare brand</div>`
+  },
+  cs2:{
+    metric:'2.1×', title:'More leads on the same budget',
+    tags:'<span class="atag">Local Services</span><span class="atag">Google Ads</span>',
+    story:`
+      <div class="cs-story-section"><h3>The challenge</h3><p>A home services company was getting clicks but few quality calls. Their Google Ads account had broad match keywords eating most of the budget and no negative keyword list — meaning they were paying for irrelevant searches.</p></div>
+      <div class="cs-story-section"><h3>Our strategy</h3><p>We ran a full account audit, identified 60%+ of spend going to irrelevant queries, rebuilt the campaign structure around exact and phrase match keywords, and set up proper call tracking so we could see which keywords drove real calls.</p></div>
+      <div class="cs-story-section"><h3>Execution</h3><p>New campaign structure with tightly themed ad groups, 200+ negative keywords added, call extensions optimised, and bid strategy switched to Target CPA. Results came within the first billing cycle.</p></div>
+    `,
+    results:`
+      <div class="mr-row"><span class="mr-lbl">Qualified leads</span><div class="mr-vals"><span class="mr-before">28/mo</span><span class="mr-arrow">→</span><span class="mr-after">59/mo</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Cost per lead</span><div class="mr-vals"><span class="mr-before">₹520</span><span class="mr-arrow">→</span><span class="mr-after">₹247</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Wasted spend</span><div class="mr-vals"><span class="mr-before">62%</span><span class="mr-arrow">→</span><span class="mr-after">12%</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">45 days</span></div></div>
+    `,
+    testi:`<p>We were skeptical after bad experiences with other agencies. Within one month we had more leads than the previous quarter combined."</p><div style="font-size:11.5px;color:var(--td)">— Owner · Home services company</div>`
+  },
+  cs3:{
+    metric:'#1', title:'Rankings for 12 target keywords',
+    tags:'<span class="atag">Healthcare</span><span class="atag">SEO</span>',
+    story:`
+      <div class="cs-story-section"><h3>The challenge</h3><p>A healthcare clinic had a website with good content but poor technical SEO. They were on page 3 for their primary keywords and generating almost no organic traffic, relying entirely on paid ads for new patients.</p></div>
+      <div class="cs-story-section"><h3>Our strategy</h3><p>Full technical audit revealed page speed issues, missing schema markup, duplicate content across service pages, and zero internal linking structure. We prioritised quick technical wins first, then moved to content.</p></div>
+      <div class="cs-story-section"><h3>Execution</h3><p>Fixed 23 technical issues, implemented medical schema markup, rewrote 8 service pages with proper keyword integration, built 14 new location and condition-specific pages, and established a monthly blog cadence.</p></div>
+    `,
+    results:`
+      <div class="mr-row"><span class="mr-lbl">Primary keywords ranking</span><div class="mr-vals"><span class="mr-before">Page 3</span><span class="mr-arrow">→</span><span class="mr-after">#1–3</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Organic traffic</span><div class="mr-vals"><span class="mr-before">320/mo</span><span class="mr-arrow">→</span><span class="mr-after">896/mo</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Organic leads</span><div class="mr-vals"><span class="mr-before">4/mo</span><span class="mr-arrow">→</span><span class="mr-after">31/mo</span></div></div>
+      <div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">90 days</span></div></div>
+    `,
+    testi:`<p>We're now getting 30+ patient enquiries a month from Google search alone. We never thought SEO could work this fast."</p><div style="font-size:11.5px;color:var(--td)">— Marketing Head · Healthcare clinic</div>`
+  },
+  cs4:{
+    metric:'₹180',title:'Cost per qualified property lead',
+    tags:'<span class="atag">Real Estate</span><span class="atag">Meta Ads</span>',
+    story:`<div class="cs-story-section"><h3>The challenge</h3><p>A real estate developer was generating leads at ₹650/lead via Meta Ads — but most were unqualified. They needed high-ticket buyers for a premium project, not casual browsers.</p></div><div class="cs-story-section"><h3>Our strategy</h3><p>The issue was broad targeting and a generic lead form. We rebuilt the targeting using income-based audience signals, layered with lookalikes from past buyers. We added a qualifying question to the lead form to filter serious enquiries.</p></div><div class="cs-story-section"><h3>Execution</h3><p>New creatives showing the property's USPs for high-income buyers, instant form with 2 qualifying questions, and a retargeting sequence for video viewers. Lead quality improved dramatically within 3 weeks.</p></div>`,
+    results:`<div class="mr-row"><span class="mr-lbl">Cost per lead</span><div class="mr-vals"><span class="mr-before">₹650</span><span class="mr-arrow">→</span><span class="mr-after">₹180</span></div></div><div class="mr-row"><span class="mr-lbl">Lead quality</span><div class="mr-vals"><span class="mr-before">18%</span><span class="mr-arrow">→</span><span class="mr-after">54% qualified</span></div></div><div class="mr-row"><span class="mr-lbl">Site visits booked</span><div class="mr-vals"><span class="mr-only">+210%</span></div></div><div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">30 days</span></div></div>`,
+    testi:`<p>Not just cheaper leads — better leads. Our sales team is actually happy now."</p><div style="font-size:11.5px;color:var(--td)">— Sales Director · Real estate developer</div>`
+  },
+  cs5:{
+    metric:'60%',title:'Of inbound leads from blog',
+    tags:'<span class="atag">SaaS</span><span class="atag">SEO & Content</span>',
+    story:`<div class="cs-story-section"><h3>The challenge</h3><p>A B2B SaaS company had a blog that was 3 years old but drove almost no traffic. Content was being published without keyword research or a conversion strategy — articles that ranked for nothing and converted no one.</p></div><div class="cs-story-section"><h3>Our strategy</h3><p>We audited all 40+ existing articles and found 6 with ranking potential. We then built a fresh content calendar around bottom-of-funnel keywords — search terms used by people actively looking for software solutions, not just industry news.</p></div><div class="cs-story-section"><h3>Execution</h3><p>Rewrote 6 existing articles with proper keyword targeting, published 8 new comparison and best-of articles, added conversion CTAs to every post, and built an email capture for a free resource. Results compounded month over month.</p></div>`,
+    results:`<div class="mr-row"><span class="mr-lbl">Blog organic traffic</span><div class="mr-vals"><span class="mr-before">890/mo</span><span class="mr-arrow">→</span><span class="mr-after">4,200/mo</span></div></div><div class="mr-row"><span class="mr-lbl">Demo requests from blog</span><div class="mr-vals"><span class="mr-before">2/mo</span><span class="mr-arrow">→</span><span class="mr-after">28/mo</span></div></div><div class="mr-row"><span class="mr-lbl">Blog share of leads</span><div class="mr-vals"><span class="mr-only">60%</span></div></div><div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">5 months</span></div></div>`,
+    testi:`<p>Our blog is now our best sales rep. It works 24/7 and never asks for a raise."</p><div style="font-size:11.5px;color:var(--td)">— Co-founder · SaaS company</div>`
+  },
+  cs6:{
+    metric:'3.8×',title:'Return on ad spend (ROAS)',
+    tags:'<span class="atag">E-commerce</span><span class="atag">Google Ads</span>',
+    story:`<div class="cs-story-section"><h3>The challenge</h3><p>An online fashion brand had a Google Ads ROAS of 1.2× — barely breaking even. They were running a single Smart Shopping campaign and had no visibility into which products were profitable vs which were burning budget.</p></div><div class="cs-story-section"><h3>Our strategy</h3><p>Moved away from the opaque Smart Shopping setup and rebuilt with standard Shopping campaigns segmented by product margin. High-margin products got more budget; low-margin products were excluded or throttled.</p></div><div class="cs-story-section"><h3>Execution</h3><p>Restructured shopping feeds, created separate campaigns by margin tier, added Performance Max for top performers, and set up target ROAS bidding per campaign. Results were visible within the first 2 weeks.</p></div>`,
+    results:`<div class="mr-row"><span class="mr-lbl">ROAS</span><div class="mr-vals"><span class="mr-before">1.2×</span><span class="mr-arrow">→</span><span class="mr-after">3.8×</span></div></div><div class="mr-row"><span class="mr-lbl">Revenue from ads</span><div class="mr-vals"><span class="mr-only">+217%</span></div></div><div class="mr-row"><span class="mr-lbl">Cost per conversion</span><div class="mr-vals"><span class="mr-before">₹420</span><span class="mr-arrow">→</span><span class="mr-after">₹148</span></div></div><div class="mr-row"><span class="mr-lbl">Timeline</span><div class="mr-vals"><span class="mr-only">45 days</span></div></div>`,
+    testi:`<p>We went from barely breaking even to having Google Ads be our most profitable channel in 6 weeks."</p><div style="font-size:11.5px;color:var(--td)">— Founder · Online fashion brand</div>`
+  }
+};
+
+function filterCS(tag, el){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.cs-card').forEach(card=>{
+    if(tag==='all') card.style.display='';
+    else{
+      const tags = card.dataset.tags||'';
+      const svcMap = {seo:'seo',meta:'meta',google:'google'};
+      card.style.display = tags.includes(tag) ? '' : 'none';
+    }
+  });
+}
+
+function openCS(id){
+  const d = csData[id];
+  if(!d) return;
+  document.getElementById('cs-detail-tags').innerHTML = d.tags;
+  document.getElementById('cs-detail-metric').innerHTML = d.metric;
+  document.getElementById('cs-detail-title').textContent = d.title;
+  document.getElementById('cs-detail-story').innerHTML = d.story;
+  document.getElementById('cs-detail-results').innerHTML = d.results;
+  document.getElementById('cs-detail-testi').innerHTML = `<p style="font-size:13px;color:var(--tm);line-height:1.7;font-style:italic;margin-bottom:10px">${d.testi}</p>`;
+  document.getElementById('cs-grid').closest('section').style.display='none';
+  document.getElementById('cs-list-view').style.display='none';
+  document.getElementById('cs-detail').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function closeCS(){
+  const sec = document.getElementById('cs-grid');
+  if(sec) sec.closest('section').style.display='';
+  document.getElementById('cs-list-view').style.display='';
+  document.getElementById('cs-detail').style.display='none';
+}
+
+function submitForm(){
+  const inputs = document.querySelectorAll('#page-book .form-input');
+  let ok = true;
+  inputs.forEach(i=>{if(!i.value.trim()){i.style.borderColor='rgba(224,112,112,0.5)';ok=false;}else{i.style.borderColor=''}});
+  if(!ok){ alert('Please fill in all fields.'); return; }
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = '✓ You\'re booked! Check your WhatsApp.';
+  btn.style.background = 'rgba(165,218,118,0.3)';
+  btn.style.color = 'var(--gr)';
+  btn.style.border = '0.5px solid var(--ac3)';
+  btn.disabled = true;
+}
+
+// Init
+goto('home');
+</script>
+</body>
+</html>
